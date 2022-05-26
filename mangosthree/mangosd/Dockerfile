@@ -1,4 +1,4 @@
-FROM gcc-cmake as builder
+FROM gcc-cmake:latest as builder
 ARG MANGOS_SERVER_VERSION=master
 ARG THREAD_COUNT="-j4"
 
