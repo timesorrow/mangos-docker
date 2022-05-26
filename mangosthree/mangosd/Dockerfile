@@ -1,18 +1,8 @@
-FROM gcc:7.3.0 as builder
+FROM gcc-cmake as builder
 ARG MANGOS_SERVER_VERSION=master
 ARG THREAD_COUNT="-j4"
 
 RUN apt-get update -qq && \
-    wget http://www.cmake.org/files/v3.12/cmake-3.12.1.tar.gz && \
-    tar -xvzf cmake-3.12.1.tar.gz && \
-    cd cmake-3.12.1/ && \
-    ./configure && \
-    make && \
-    /usr/local/bin/cmake --version && \
-    sudo cp -p /usr/local/bin/cmake{,.3.10.1} && \
-    ll /usr/local/bin/cmake* && \
-    sudo make install && \
-    sudo update-alternatives --install /usr/bin/cmake cmake /usr/local/bin/cmake 1 --force && \
     cmake --version && \
     apt-get install openssl libssl-dev -y && \
     git clone https://github.com/mangosthree/server.git -b ${MANGOS_SERVER_VERSION} --recursive && \
